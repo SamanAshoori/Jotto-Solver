@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Diagnostics;
+using System.IO;
+
+namespace Heterogram_Checker
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //creates an array and each line is a string in the array
+            string[] lines = System.IO.File.ReadAllLines
+        (@"C:\Users\saman\OneDrive\Jotto\Files\OED51.txt");
+            StreamWriter OED5Maker = new StreamWriter(@"C:\Users\saman\OneDrive\Jotto\Files\jottoCompatible.txt");
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (checkHeterogram(lines[i]))
+                {
+                    OED5Maker.WriteLine(lines[i]);
+                    OED5Maker.Flush();
+                }
+                else
+                {
+                    //Do nothing
+                }               
+            }
+        }
+        public static bool checkHeterogram(string s)
+        {          
+            int str_len = s.Length;
+            return s.ToLower().Distinct().Count() == str_len;
+            //If you consider for a second that a string is an array of chars this checks all the chars in the string are distinct
+            //if the count of the modified string s is different to its orignal length that means the word is not a heterogram
+            //Only returns true for heterograms
+        }
+    }
+}
